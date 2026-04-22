@@ -1,194 +1,121 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
+    <title>X Reply Gemini</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X Reply Generator - Gemini AI</title>
+    <meta name="viewport" content="width=device-width">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh; padding: 20px;
-        }
-        .container { 
-            max-width: 600px; margin: 0 auto; 
-            background: white; border-radius: 20px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden;
-        }
-        header { 
-            background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%); 
-            color: white; text-align: center; padding: 30px; 
-        }
-        header h1 { font-size: 2.2em; margin-bottom: 10px; }
-        .input-section { padding: 30px; display: flex; gap: 15px; }
-        #xUrl { 
-            flex: 1; padding: 15px; border: 2px solid #e1e5e9; 
-            border-radius: 12px; font-size: 16px; 
-        }
-        #xUrl:focus { outline: none; border-color: #1da1f2; }
-        #generateBtn { 
-            padding: 15px 30px; background: #1da1f2; 
-            color: white; border: none; border-radius: 12px; 
-            font-size: 16px; cursor: pointer; 
-        }
-        #generateBtn:hover:not(:disabled) { 
-            background: #0d8bd9; transform: translateY(-2px); 
-        }
-        #generateBtn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .loading { padding: 40px 30px; text-align: center; color: #666; display: none; }
-        .spinner { 
-            width: 40px; height: 40px; border: 4px solid #f3f3f3; 
-            border-top: 4px solid #1da1f2; border-radius: 50%; 
-            animation: spin 1s linear infinite; margin: 0 auto 20px; 
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .result { padding: 30px; display: none; }
-        #replyText { 
-            width: 100%; min-height: 120px; padding: 20px; 
-            border: 2px solid #e1e5e9; border-radius: 12px; 
-            font-size: 16px; resize: vertical; background: #fafbfc;
-        }
-        #copyBtn { 
-            position: absolute; top: 15px; right: 15px; 
-            padding: 8px 16px; background: #28a745; color: white; 
-            border: none; border-radius: 8px; cursor: pointer; 
-        }
-        .reply-container { position: relative; margin-bottom: 20px; }
-        .error { padding: 20px 30px; background: #f8d7da; color: #721c24; display: none; }
-        .hidden { display: none !important; }
-        @media (max-width: 768px) { .input-section { flex-direction: column; } }
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}.container{max-width:600px;margin:0 auto;background:white;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden}header{background:linear-gradient(135deg,#1da1f2 0%,#0d8bd9 100%);color:white;text-align:center;padding:30px}h1{font-size:2em;margin-bottom:10px}.input-section{padding:30px;display:flex;gap:15px;flex-wrap:wrap}#xUrl{flex:1;padding:15px;border:2px solid #ddd;border-radius:12px;font-size:16px;min-width:280px}#xUrl:focus{outline:none;border-color:#1da1f2}#generateBtn{padding:15px 25px;background:#1da1f2;color:white;border:none;border-radius:12px;font-size:16px;cursor:pointer;font-weight:600}#generateBtn:hover:not(:disabled){background:#0d8bd9;transform:translateY(-1px)}#generateBtn:disabled{opacity:.6;cursor:not-allowed}.loading{padding:40px 30px;text-align:center;color:#666;display:none}.spinner{width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #1da1f2;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}@keyframes spin{to{transform:rotate(360deg)}}.result{padding:30px;display:none}.reply-container{position:relative;margin-bottom:20px}#replyText{width:100%;min-height:120px;padding:20px;border:2px solid #ddd;border-radius:12px;font-size:16px;resize:vertical;background:#fafbfc;font-family:inherit}#copyBtn{position:absolute;top:15px;right:15px;padding:8px 16px;background:#28a745;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px}#copyBtn:hover{background:#218838}.stats{text-align:right;color:#666;font-size:14px}.error{padding:20px 30px;background:#f8d7da;color:#721c24;border-radius:12px;margin:20px 30px;display:none}@media(max-width:768px){.input-section{flex-direction:column}#xUrl{min-width:auto}}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🐦 X Reply Generator</h1>
-            <p>Reply otomatis bahasa Jepang - Gemini AI</p>
+            <p>Reply Jepang natural - Gemini AI</p>
         </header>
-
         <div class="input-section">
-            <input type="url" id="xUrl" placeholder="https://x.com/username/status/123456..." required>
-            <button id="generateBtn">Generate Reply</button>
+            <input id="xUrl" placeholder="https://x.com/username/status/123456..." required>
+            <button id="generateBtn">Generate</button>
         </div>
-
         <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <p>Generating reply Jepang natural...</p>
+            <div class="spinner"></div><p>Membuat reply Jepang...</p>
         </div>
-
         <div id="result" class="result">
             <h3>Reply siap copy:</h3>
             <div class="reply-container">
-                <textarea id="replyText" readonly placeholder="Reply akan muncul disini..."></textarea>
+                <textarea id="replyText" readonly placeholder="Reply akan muncul..."></textarea>
                 <button id="copyBtn">📋 Copy</button>
             </div>
-            <div style="text-align:right;color:#666;font-size:14px;">
-                <span id="charCount">0 karakter</span>
-            </div>
+            <div class="stats"><span id="charCount">0 char</span></div>
         </div>
-
         <div id="error" class="error"></div>
     </div>
-
     <script>
-        class XReplyGenerator {
-            constructor() {
-                this.init();
-            }
-
-            init() {
-                this.urlInput = document.getElementById('xUrl');
-                this.generateBtn = document.getElementById('generateBtn');
-                this.loading = document.getElementById('loading');
-                this.result = document.getElementById('result');
-                this.replyText = document.getElementById('replyText');
-                this.copyBtn = document.getElementById('copyBtn');
-                this.error = document.getElementById('error');
-                this.charCount = document.getElementById('charCount');
-
-                this.generateBtn.onclick = () => this.generateReply();
-                this.copyBtn.onclick = () => this.copyReply();
-                this.replyText.oninput = () => this.updateCharCount();
-                
-                this.urlInput.onkeypress = (e) => {
-                    if (e.key === 'Enter') this.generateReply();
-                };
-            }
-
-            async generateReply() {
-                const url = this.urlInput.value.trim();
-                if (!url) {
-                    this.showError('Masukkan link X/Twitter!');
-                    return;
-                }
-
-                this.resetUI();
-                this.showLoading();
-
-                try {
-                    const reply = await this.callGemini(url);
-                    this.showResult(reply);
-                } catch (error) {
-                    this.showError(error.message);
-                }
-            }
-
-            async callGemini(tweetUrl) {
-                const response = await fetch('/api/generate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ tweetUrl })
-                });
-
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.error || 'API Error ' + response.status);
-                }
-
-                const data = await response.json();
-                return data.reply;
-            }
-
-            showResult(reply) {
-                this.loading.classList.add('hidden');
-                this.replyText.value = reply;
-                this.updateCharCount();
-                this.result.style.display = 'block';
-                this.replyText.focus();
-                this.replyText.select();
-            }
-
-            copyReply() {
-                this.replyText.select();
-                document.execCommand('copy');
-                this.copyBtn.textContent = '✅ Copied!';
-                setTimeout(() => this.copyBtn.textContent = '📋 Copy', 2000);
-            }
-
-            updateCharCount() {
-                this.charCount.textContent = this.replyText.value.length + ' karakter';
-            }
-
-            resetUI() {
-                this.result.style.display = 'none';
-                this.error.classList.add('hidden');
-                this.generateBtn.disabled = true;
-            }
-
-            showLoading() {
-                this.loading.classList.remove('hidden');
-            }
-
-            showError(message) {
-                this.error.textContent = message;
-                this.error.classList.remove('hidden');
-                this.generateBtn.disabled = false;
-                this.loading.classList.add('hidden');
+    class App{
+        constructor(){
+            this.urlInput=document.getElementById('xUrl');
+            this.btn=document.getElementById('generateBtn');
+            this.loading=document.getElementById('loading');
+            this.result=document.getElementById('result');
+            this.replyText=document.getElementById('replyText');
+            this.copyBtn=document.getElementById('copyBtn');
+            this.errorDiv=document.getElementById('error');
+            this.charCount=document.getElementById('charCount');
+            
+            this.btn.onclick=()=>this.generate();
+            this.copyBtn.onclick=()=>this.copy();
+            this.replyText.oninput=()=>this.updateCount();
+        }
+        async generate(){
+            const url=this.urlInput.value.trim();
+            if(!url){this.error('Masukkan link X!');return;}
+            
+            this.reset();
+            this.showLoading();
+            console.log('🚀 Starting generate...');
+            
+            try{
+                const reply=await this.callAPI(url);
+                this.showReply(reply);
+                console.log('✅ Success:',reply);
+            }catch(e){
+                console.error('❌ Error:',e);
+                this.error(e.message);
             }
         }
-
-        new XReplyGenerator();
+        async callAPI(url){
+            console.log('📡 Calling /api/generate...');
+            const res=await fetch('/api/generate',{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({tweetUrl:url})
+            });
+            
+            console.log('📊 Response status:',res.status);
+            
+            if(!res.ok){
+                const err=await res.json();
+                throw new Error(err.error || `HTTP ${res.status}`);
+            }
+            
+            const data=await res.json();
+            console.log('📄 Raw data:',data);
+            return data.reply;
+        }
+        showReply(reply){
+            this.loading.style.display='none';
+            this.replyText.value=reply;
+            this.result.style.display='block';
+            this.updateCount();
+            this.replyText.focus();
+            this.btn.disabled=false;
+        }
+        copy(){
+            this.replyText.select();
+            document.execCommand('copy');
+            this.copyBtn.textContent='✅ Copied!';
+            setTimeout(()=>this.copyBtn.textContent='📋 Copy',1500);
+        }
+        updateCount(){
+            this.charCount.textContent=this.replyText.value.length+' char';
+        }
+        reset(){
+            this.result.style.display='none';
+            this.errorDiv.style.display='none';
+            this.btn.disabled=true;
+        }
+        showLoading(){
+            this.loading.style.display='block';
+        }
+        error(msg){
+            this.errorDiv.textContent=msg;
+            this.errorDiv.style.display='block';
+            this.loading.style.display='none';
+            this.btn.disabled=false;
+        }
+    }
+    new App();
     </script>
 </body>
 </html>
