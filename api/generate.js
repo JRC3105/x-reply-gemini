@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ reply: 'API Key belum diset di Vercel' });
     }
 
-    const prompt = `Satu kalimat reply Twitter BAHASA JEPANG natural:
+    const prompt = `buat reply dalam bahasa jepang yang natural, sesuai konteks dan tidak spam dari postingan berikut:
 
 Tweet: ${tweetUrl}
 
