@@ -76,7 +76,7 @@ Balasan:`;
 
     try {
         // Ganti dengan API key Gemini Anda
-        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_GEMINI_API_KEY', {
+        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyB6sZ1jzvyVaDourFZwNXQsILeitQSkHwc', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
