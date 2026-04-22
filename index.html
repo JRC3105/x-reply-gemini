@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Reply Generator - Gemini AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐦 X Reply Generator</h1>
+            <p>Generate reply otomatis dalam bahasa Jepang menggunakan Gemini AI</p>
+        </header>
+
+        <div class="input-section">
+            <input type="url" id="xUrl" placeholder="Masukkan link postingan X (Twitter)..." required>
+            <button id="generateBtn">Generate Reply</button>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Generating reply dalam bahasa Jepang...</p>
+        </div>
+
+        <div id="result" class="result hidden">
+            <h3>Reply yang dihasilkan:</h3>
+            <div class="reply-box">
+                <textarea id="replyText" readonly placeholder="Reply akan muncul di sini..."></textarea>
+                <div class="copy-btn-container">
+                    <button id="copyBtn">📋 Copy</button>
+                </div>
+            </div>
+            <div class="stats">
+                <span id="charCount">0 karakter</span>
+            </div>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
