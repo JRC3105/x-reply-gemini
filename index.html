@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X Reply Generator JP</title>
+    <title>🇯🇵 X Reply Generator - Gemini AI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="data:application/manifest+json,{
-        \"name\": \"X Reply JP Generator\",
+        \"name\": \"X Reply JP - Gemini AI\",
         \"short_name\": \"XReplyJP\",
         \"start_url\": \".\",
         \"display\": \"standalone\",
@@ -14,8 +14,7 @@
         \"theme_color\": \"#667eea\",
         \"icons\": [{
             \"src\": \"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijk2IiBmaWxsPSIjNjY3ZWVhIi8+CjxwYXRoIGQ9Ik0xMjAgODhjMCAxMS4zMi04LjY4IDI0LTE5LjIgMjRDOTEuNzIgODguNjggODMuMDQgODggNzIgODhjLTExLjMyIDAtMTkuMiA4LjY4LTE5LjIgMTkuMnY0OGMwIDEwLjUyIDguNjggMTkuMiAxOS4yIDE5LjJoNDhjMTAuNTIgMCAxOS4yLTguNjggMTkuMi0xOS4ydi00OGMwLTExLjMyLTguNjgtMTkuMi0xOS4yLTE5LjJ6IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=\",
-            \"sizes\": \"192x192\",
-            \"type\": \"image/svg+xml\"
+            \"sizes\": \"192x192\"
         }]
     }">
     <meta name="theme-color" content="#667eea">
@@ -23,24 +22,25 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🇯🇵 X Reply Generator</h1>
-            <p>Masukkan link tweet → Generate reply Jepang natural</p>
+            <h1>🤖 X Reply Generator</h1>
+            <p>🇯🇵 Gemini AI buat reply Jepang natural untuk tweet</p>
         </div>
 
-        <!-- API Key Section (Opsional - bisa dihilangkan untuk publik) -->
-        <div class="api-input">
-    <label>🔑 Gemini API Key:</label>
-    <input type="password" id="apiKeyInput" placeholder="Masukkan API Key">
-    <small>Dapatkan gratis di aistudio.google.com/app/apikey</small>
-    </div>
+        <!-- API Key Input -->
+        <div class="api-section">
+            <div class="input-group">
+                <label>🔑 Gemini API Key:</label>
+                <input type="password" id="apiKey" placeholder="Masukkan API Key dari aistudio.google.com">
+                <small><a href="https://aistudio.google.com/app/apikey" target="_blank">Dapatkan gratis</a></small>
+            </div>
+        </div>
 
         <!-- Main Form -->
         <div class="form-container">
             <div class="input-group">
-                <label for="tweetUrl">🔗 Link Postingan X/Twitter:</label>
-                <input type="url" id="tweetUrl" placeholder="https://twitter.com/username/status/123456789">
+                <label for="tweetUrl">🔗 Link Tweet X/Twitter:</label>
+                <input type="url" id="tweetUrl" placeholder="https://twitter.com/elonmusk/status/123456789">
             </div>
-            
             <button class="generate-btn" onclick="generateReply()">
                 🚀 Generate Reply Jepang
             </button>
@@ -49,18 +49,23 @@
         <!-- Loading -->
         <div class="loading" id="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>Gemini sedang berpikir... ⏳</p>
+            <p>Gemini AI sedang generate... ⏳</p>
         </div>
 
         <!-- Result -->
         <div class="result" id="result" style="display: none;">
             <h3>💬 Reply Jepang Natural:</h3>
             <div class="reply-box" id="replyBox"></div>
-            <button class="copy-btn" onclick="copyReply()">📋 Copy Reply</button>
+            <button class="copy-btn" onclick="copyReply()">📋 Copy ke Clipboard</button>
         </div>
 
         <!-- Error -->
         <div class="error" id="error" style="display: none;"></div>
+
+        <!-- Info -->
+        <div class="info">
+            <small>Powered by <strong>Gemini 1.5 Flash</strong> | Free PWA for Android</small>
+        </div>
     </div>
 
     <script src="script.js"></script>
