@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Reply Generator JP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="data:application/manifest+json,{
+        \"name\": \"X Reply JP Generator\",
+        \"short_name\": \"XReplyJP\",
+        \"start_url\": \".\",
+        \"display\": \"standalone\",
+        \"background_color\": \"#667eea\",
+        \"theme_color\": \"#667eea\",
+        \"icons\": [{
+            \"src\": \"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijk2IiBmaWxsPSIjNjY3ZWVhIi8+CjxwYXRoIGQ9Ik0xMjAgODhjMCAxMS4zMi04LjY4IDI0LTE5LjIgMjRDOTEuNzIgODguNjggODMuMDQgODggNzIgODhjLTExLjMyIDAtMTkuMiA4LjY4LTE5LjIgMTkuMnY0OGMwIDEwLjUyIDguNjggMTkuMiAxOS4yIDE5LjJoNDhjMTAuNTIgMCAxOS4yLTguNjggMTkuMi0xOS4ydi00OGMwLTExLjMyLTguNjgtMTkuMi0xOS4yLTE5LjJ6IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=\",
+            \"sizes\": \"192x192\",
+            \"type\": \"image/svg+xml\"
+        }]
+    }">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇯🇵 X Reply Generator</h1>
+            <p>Masukkan link tweet → Generate reply Jepang natural</p>
+        </div>
+
+        <!-- API Key Section (Opsional - bisa dihilangkan untuk publik) -->
+        <div class="api-section" id="apiSection">
+            <input type="password" id="apiKey" placeholder="Masukkan Gemini API Key">
+            <button onclick="toggleApiKey()">Gunakan API Pribadi</button>
+        </div>
+
+        <!-- Main Form -->
+        <div class="form-container">
+            <div class="input-group">
+                <label for="tweetUrl">🔗 Link Postingan X/Twitter:</label>
+                <input type="url" id="tweetUrl" placeholder="https://twitter.com/username/status/123456789">
+            </div>
+            
+            <button class="generate-btn" onclick="generateReply()">
+                🚀 Generate Reply Jepang
+            </button>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Gemini sedang berpikir... ⏳</p>
+        </div>
+
+        <!-- Result -->
+        <div class="result" id="result" style="display: none;">
+            <h3>💬 Reply Jepang Natural:</h3>
+            <div class="reply-box" id="replyBox"></div>
+            <button class="copy-btn" onclick="copyReply()">📋 Copy Reply</button>
+        </div>
+
+        <!-- Error -->
+        <div class="error" id="error" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
