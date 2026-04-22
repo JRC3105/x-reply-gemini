@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Reply Gemini</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>X Reply Generator</h1>
+        <p>Masukkan link postingan X untuk generate balasan bahasa Jepang.</p>
+        
+        <input type="text" id="xLink" placeholder="https://x.com/username/status/..." required>
+        <button id="generateBtn" onclick="generateReply()">Generate Reply</button>
+
+        <div id="loading" class="hidden">Sedang memproses...</div>
+        
+        <div id="resultContainer" class="hidden">
+            <h3>Hasil Balasan:</h3>
+            <div id="resultText"></div>
+            <button onclick="copyToClipboard()">Salin Teks</button>
+        </div>
+    </div>
+
+    <script>
+        async function generateReply() {
+            const link = document.getElementById('xLink').value;
+            const btn = document.getElementById('generateBtn');
+            const loader = document.getElementById('loading');
+            const resultBox = document.getElementById('resultContainer');
+            const resultText = document.getElementById('resultText');
+
+            if (!link) {
+                alert("Silakan masukkan link terlebih dahulu!");
+                return;
+            }
+
+            // Tampilkan loading, sembunyikan hasil lama
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            resultBox.classList.add('hidden');
+
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ link: link })
+                });
+
+                const data = await response.json();
+
+                if (data.reply) {
+                    resultText.innerText = data.reply;
+                    resultBox.classList.remove('hidden');
+                } else {
+                    alert("Error: " + data.error);
+                }
+            } catch (error) {
+                alert("Terjadi kesalahan koneksi ke server.");
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('resultText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Berhasil disalin!");
+        }
+    </script>
+</body>
+</html>
